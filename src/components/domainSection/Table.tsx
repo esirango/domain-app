@@ -1,10 +1,5 @@
-import React, { useRef, useState, useEffect } from "react";
-import {
-    BiDetail,
-    BiErrorCircle,
-    BiLinkExternal,
-    BiLoader,
-} from "react-icons/bi";
+import React, { useState } from "react";
+import { BiErrorCircle, BiLinkExternal, BiLoader } from "react-icons/bi";
 import { BsCircleFill, BsThreeDotsVertical } from "react-icons/bs";
 import Link from "next/link";
 import {
@@ -13,57 +8,15 @@ import {
     checkVerificationStatusColor,
     checkVerificationStatusTitle,
 } from "@/func/domainChecks";
+import OptionsMenu from "./OptionMenu";
+import TableCell from "./TableCell";
 
-const TableCell = ({ children, className }: any) => {
-    return (
-        <td className={`border-t border-gray-300 p-2 ${className}`}>
-            {children}
-        </td>
-    );
-};
-
-const OptionsMenu = ({ onClose }: { onClose: () => void }) => {
-    const menuRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (
-                menuRef.current &&
-                !menuRef.current.contains(event.target as Node)
-            ) {
-                onClose();
-            }
-        };
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [onClose]);
-
-    return (
-        <div
-            ref={menuRef}
-            className="w-[150px] absolute right-4 mt-2 p-3 h-fit bg-white shadow-md border border-gray-200 rounded-lg z-100"
-        >
-            <ul className="text-sm text-gray-700">
-                <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                    مشاهده
-                </li>
-                <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                    ویرایش
-                </li>
-                <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                    حذف
-                </li>
-                <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                    کپی
-                </li>
-            </ul>
-        </div>
-    );
-};
-
-function Table({ domainsList, domainsListLoading }: any) {
+function Table({
+    domainsList,
+    domainsListLoading,
+    toggleDrawer,
+    setDrawerType,
+}: any) {
     const [openMenuId, setOpenMenuId] = useState<number | null>(null);
     const [menuPosition, setMenuPosition] = useState<{
         x: number;
@@ -75,7 +28,6 @@ function Table({ domainsList, domainsListLoading }: any) {
         setMenuPosition({ x: rect.right, y: rect.bottom });
         setOpenMenuId(domainId);
     };
-
     return (
         <div className="flex justify-center w-full my-20 overflow-x-auto ">
             {domainsListLoading ? (
@@ -150,9 +102,12 @@ function Table({ domainsList, domainsListLoading }: any) {
                                             }}
                                         >
                                             <OptionsMenu
+                                                setDrawerType={setDrawerType}
+                                                toggleDrawer={toggleDrawer}
                                                 onClose={() =>
                                                     setOpenMenuId(null)
                                                 }
+                                                domainID={domain.id}
                                             />
                                         </div>
                                     )}

@@ -2,31 +2,29 @@ import { fetcher } from "@/func/fetchers";
 import { API_URL } from "@/store/environmentVariables";
 import useSWR from "swr";
 
-const useCreateDomain = () => {
+const useUpdateDomain = () => {
     const { data, error, isLoading, mutate } = useSWR(null, null);
 
-    const createDomain = async (postData: any) => {
-        console.log(postData);
+    const updateDomain = async (postData: any) => {
         const response = await fetcher({
             url: `${API_URL}/domain`,
             body: {
-                createdDate: 1737992850,
                 domain: postData.domain,
                 status: postData.status,
                 isActive: postData.isActive,
             },
-            method: "POST",
+            method: "PUT",
         });
         mutate();
         return response;
     };
 
     return {
-        createDomain,
-        createDomainData: data,
-        createDomainError: error,
-        createDomainLoading: isLoading,
+        updateDomain,
+        updateDomainData: data,
+        updateDomainError: error,
+        updateDomainLoading: isLoading,
     };
 };
 
-export default useCreateDomain;
+export default useUpdateDomain;

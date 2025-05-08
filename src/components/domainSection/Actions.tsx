@@ -1,19 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import { BiPlus, BiSearch } from "react-icons/bi";
 import Drawer from "../modals/Drawer";
 
-function Actions() {
-    const [isOpen, setIsOpen] = useState<boolean>(false);
-
-    const toggleDrawer = () => {
-        setIsOpen(!isOpen);
-    };
+function Actions({
+    drawerType,
+    setDrawerType,
+    toggleDrawer,
+    isOpenDrawer,
+    setIsOpenDrawer,
+}: any) {
     return (
         <>
             <div className="flex flex-wrap justify-between items-center gap-8 mx-12 ">
                 <div className="w-full md:w-auto flex justify-center">
                     <button
-                        onClick={toggleDrawer}
+                        onClick={() => {
+                            toggleDrawer();
+                            setDrawerType("Add");
+                        }}
                         className="cursor-pointer h-12 lg:w-full md:w-full flex justify-center items-center text-white bg-blue-400 rounded-sm px-6 py-3 font-light w-2/3"
                     >
                         <BiPlus className="mr-3" />
@@ -35,7 +39,6 @@ function Actions() {
                     </div>
                 </div>
             </div>
-            <Drawer isOpen={isOpen} onClose={toggleDrawer} />
         </>
     );
 }
