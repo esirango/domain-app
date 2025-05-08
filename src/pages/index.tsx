@@ -69,6 +69,9 @@ export default function Home() {
                 setSortOrder={setSortOrder}
                 setFilterActivation={setFilterActivation}
                 setFilterStatus={setFilterStatus}
+                sortOrder={sortOrder}
+                filterActivation={filterActivation}
+                filterStatus={filterStatus}
             />
             <Table
                 toggleDrawer={toggleDrawer}

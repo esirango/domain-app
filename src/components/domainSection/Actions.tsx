@@ -10,6 +10,9 @@ function Actions({
     setSortOrder,
     setFilterActivation,
     setFilterStatus,
+    sortOrder,
+    filterActivation,
+    filterStatus,
 }: any) {
     const { setSingleGlobalDomainData } = useGlobalStates();
 
@@ -33,20 +36,22 @@ function Actions({
                 </div>
                 <div className="flex flex-col md:flex-row items-center gap-4 w-full md:max-w-2/3 justify-end ">
                     <select
+                        value={sortOrder}
                         onChange={(e) => setSortOrder(e.target.value)}
                         className="h-12 outline-none border-1 border-gray-400 rounded-sm p-3  w-2/3 md:w-auto text-gray-500"
                     >
-                        <option value="" disabled selected>
+                        <option value="" disabled>
                             Sort By
                         </option>
                         <option value="asc">Order by Ascending</option>
                         <option value="desc">Order by Descending</option>
                     </select>
                     <select
+                        value={filterActivation}
                         onChange={(e) => setFilterActivation(e.target.value)}
                         className="h-12 outline-none border-1 border-gray-400 rounded-sm p-3 w-2/3 md:w-auto text-gray-500"
                     >
-                        <option value="" disabled selected>
+                        <option value="" disabled>
                             Filters for Activation
                         </option>
                         <option value="all">All</option>
@@ -54,10 +59,11 @@ function Actions({
                         <option value="false">Disable</option>
                     </select>
                     <select
+                        value={filterStatus}
                         onChange={(e) => setFilterStatus(e.target.value)}
                         className="h-12 outline-none border-1 border-gray-400 rounded-sm p-3 w-2/3 md:w-auto text-gray-500"
                     >
-                        <option value="" disabled selected>
+                        <option value="" disabled>
                             Filters for Status
                         </option>
                         <option value="all">All</option>

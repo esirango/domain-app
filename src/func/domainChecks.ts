@@ -30,7 +30,7 @@ const checkVerificationStatusTitle = (status: string) => {
         case "verified":
             return "Verified";
         case "rejected":
-            return "Not Verified";
+            return "Rejected";
         case "pending":
             return "Pending";
         default:
