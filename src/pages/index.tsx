@@ -22,7 +22,7 @@ export default function Home() {
     const [filterStatus, setFilterStatus] = useState<string>("");
 
     const filteredDomainListData = () => {
-        if (domainsListLoading) return;
+        if (domainsListLoading || domainsListData.length < 0) return;
 
         let filteredData = domainsListData;
 
@@ -33,7 +33,7 @@ export default function Home() {
         }
 
         if (sortOrder) {
-            filteredData = filteredData.sort((a: any, b: any) => {
+            filteredData = filteredData?.sort((a: any, b: any) => {
                 const aDomain = a.domain.replace(/^https?:\/\//, "");
                 const bDomain = b.domain.replace(/^https?:\/\//, "");
 
