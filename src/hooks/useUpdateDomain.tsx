@@ -1,11 +1,9 @@
 import { fetcher } from "@/func/fetchers";
 import { API_URL } from "@/store/environmentVariables";
-import useSWR from "swr";
+import { mutate } from "swr";
 
-const useUpdateDomain = (domainID: string) => {
-    const { data, error, isLoading, mutate } = useSWR(null, null);
-
-    const updateDomain = async (postData: any) => {
+const useUpdateDomain = () => {
+    const updateDomain = async (postData: any, domainID: string) => {
         const response = await fetcher({
             url: `${API_URL}/domain/${domainID}`,
             body: {
@@ -15,15 +13,13 @@ const useUpdateDomain = (domainID: string) => {
             },
             method: "PUT",
         });
-        mutate();
+        await mutate([`${API_URL}/domain`]);
+
         return response;
     };
 
     return {
         updateDomain,
-        updateDomainData: data,
-        updateDomainError: error,
-        updateDomainLoading: isLoading,
     };
 };
 

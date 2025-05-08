@@ -51,17 +51,16 @@ const Drawer = ({ type, isOpen, onClose }: any) => {
         updateDomainData,
         updateDomainError,
         updateDomainLoading,
-    } = useUpdateDomain(
-        type === "Edit" && singleGlobalDomainData
-            ? singleGlobalDomainData.id
-            : "1"
-    );
+    } = useUpdateDomain();
 
     const onSubmit = (data: any) => {
         if (type === "Add") {
             createDomain(data);
         } else if (type === "Edit") {
-            updateDomain(data);
+            updateDomain(
+                data,
+                type === "Edit" ? singleGlobalDomainData.id : "1"
+            );
         }
         reset();
         onClose();

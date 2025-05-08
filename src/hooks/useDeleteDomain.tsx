@@ -1,22 +1,22 @@
 import { fetcher } from "@/func/fetchers";
 import { API_URL } from "@/store/environmentVariables";
-import useSWR from "swr";
+import { mutate } from "swr";
 
-const useGetDeleteDomain = (domainID: string) => {
-    const { data, error, isLoading } = useSWR(
-        [`${API_URL}/domain/${domainID}`],
-        ([url]) =>
-            fetcher({
-                url: url,
-                method: "DELETE",
-            })
-    );
+const useDeleteDomain = () => {
+    const deleteDomain = async (domainID: string) => {
+        const response = await fetcher({
+            url: `${API_URL}/domain/${domainID}`,
+            method: "DELETE",
+        });
+
+        await mutate([`${API_URL}/domain`]);
+
+        return response;
+    };
 
     return {
-        deleteDomainData: data,
-        deleteDomainError: error,
-        deleteDomainLoading: isLoading,
+        deleteDomain,
     };
 };
 
-export default useGetDeleteDomain;
+export default useDeleteDomain;

@@ -1,12 +1,9 @@
 import { fetcher } from "@/func/fetchers";
 import { API_URL } from "@/store/environmentVariables";
-import useSWR from "swr";
+import { mutate } from "swr";
 
 const useCreateDomain = () => {
-    const { data, error, isLoading, mutate } = useSWR(null, null);
-
     const createDomain = async (postData: any) => {
-        console.log(postData);
         const response = await fetcher({
             url: `${API_URL}/domain`,
             body: {
@@ -17,15 +14,13 @@ const useCreateDomain = () => {
             },
             method: "POST",
         });
-        mutate();
+        await mutate([`${API_URL}/domain`]);
+
         return response;
     };
 
     return {
         createDomain,
-        createDomainData: data,
-        createDomainError: error,
-        createDomainLoading: isLoading,
     };
 };
 

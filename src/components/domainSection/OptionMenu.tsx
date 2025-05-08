@@ -1,3 +1,4 @@
+import useDeleteDomain from "@/hooks/useDeleteDomain";
 import useGetSingleDomain from "@/hooks/useGetSingleDomain";
 import useGlobalStates from "@/store/globalStates";
 import { useEffect, useRef } from "react";
@@ -43,6 +44,7 @@ const OptionsMenu = ({
         };
     }, [onClose]);
 
+    const { deleteDomain } = useDeleteDomain();
     return (
         <div
             ref={menuRef}
@@ -53,12 +55,19 @@ const OptionsMenu = ({
                     onClick={() => {
                         toggleDrawer();
                         setDrawerType("Edit");
+                        onClose();
                     }}
                     className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
                 >
                     Edit
                 </li>
-                <li className="px-4 text-red-500 py-2 hover:bg-gray-100 cursor-pointer">
+                <li
+                    onClick={() => {
+                        deleteDomain(domainID);
+                        onClose();
+                    }}
+                    className="px-4 text-red-500 py-2 hover:bg-gray-100 cursor-pointer"
+                >
                     Delete
                 </li>
             </ul>
