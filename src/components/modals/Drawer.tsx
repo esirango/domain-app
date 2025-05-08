@@ -12,12 +12,12 @@ const Drawer = ({ isOpen, onClose }: any) => {
 
     return (
         <div
-            className={`fixed inset-0 bg-black/30 backdrop-blur-sm transition-opacity overflow-hidden ${
+            className={`fixed inset-0 z-60 bg-black/30 backdrop-blur-sm transition-opacity overflow-hidden ${
                 isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
             }`}
         >
             <div
-                className={`fixed right-0 top-0 lg:w-1/2 w-full h-full bg-white shadow-lg transition-transform transform ${
+                className={`fixed right-0 z-70 top-0 lg:w-1/2 w-full h-full  bg-white shadow-lg transition-transform transform ${
                     isOpen ? "translate-x-0" : "translate-x-full"
                 }`}
             >
