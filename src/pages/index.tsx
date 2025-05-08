@@ -22,7 +22,7 @@ export default function Home() {
     const [filterStatus, setFilterStatus] = useState<string>("");
 
     const filteredDomainListData = () => {
-        if (domainsListLoading || domainsListData.length < 0) return;
+        if (domainsListLoading || domainsListData?.length < 0) return;
 
         let filteredData = domainsListData;
 

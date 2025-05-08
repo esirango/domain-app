@@ -33,7 +33,7 @@ function Table({
         <div className="flex justify-center w-full my-20 overflow-x-auto ">
             {domainsListLoading ? (
                 <BiLoader className="text-6xl mt-24" />
-            ) : domainsList.length > 0 ? (
+            ) : domainsList?.length > 0 ? (
                 <table className="w-full rounded-lg mx-12 relative">
                     <thead className="text-left ">
                         <tr>
