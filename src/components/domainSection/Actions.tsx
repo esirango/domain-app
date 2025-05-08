@@ -9,6 +9,7 @@ function Actions({
     setSearch,
     setSortOrder,
     setFilterActivation,
+    setFilterStatus,
 }: any) {
     const { setSingleGlobalDomainData } = useGlobalStates();
 
@@ -51,6 +52,18 @@ function Actions({
                         <option value="all">All</option>
                         <option value="true">Active</option>
                         <option value="false">Disable</option>
+                    </select>
+                    <select
+                        onChange={(e) => setFilterStatus(e.target.value)}
+                        className="h-12 outline-none border-1 border-gray-400 rounded-sm p-3 w-2/3 md:w-auto text-gray-500"
+                    >
+                        <option value="" disabled selected>
+                            Filters for Status
+                        </option>
+                        <option value="all">All</option>
+                        <option value="verified">Verified</option>
+                        <option value="pending">Pending</option>
+                        <option value="rejected">Rejected</option>
                     </select>
                     <div className="relative w-2/3 md:w-auto">
                         <BiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2  " />

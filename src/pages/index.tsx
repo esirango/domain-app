@@ -19,6 +19,7 @@ export default function Home() {
     const [search, setSearch] = useState<string>("");
     const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
     const [filterActivation, setFilterActivation] = useState<string>("");
+    const [filterStatus, setFilterStatus] = useState<string>("");
 
     const filteredDomainListData = () => {
         if (domainsListLoading) return;
@@ -49,9 +50,14 @@ export default function Home() {
             );
         }
 
+        if (filterStatus && filterStatus !== "all") {
+            filteredData = filteredData.filter(
+                (domain: any) => String(domain.status) === String(filterStatus)
+            );
+        }
+
         return filteredData;
     };
-    console.log(filterActivation);
     return (
         <div className="my-2.5 mx-4">
             <Header />
@@ -62,6 +68,7 @@ export default function Home() {
                 setSearch={setSearch}
                 setSortOrder={setSortOrder}
                 setFilterActivation={setFilterActivation}
+                setFilterStatus={setFilterStatus}
             />
             <Table
                 toggleDrawer={toggleDrawer}

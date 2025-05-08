@@ -21,7 +21,6 @@ const OptionsMenu = ({
     useEffect(() => {
         if (singleDomainData) {
             setSingleGlobalDomainData(singleDomainData);
-            console.log(singleDomainData);
         }
     }, [singleDomainData, singleGlobalDomainData]);
 

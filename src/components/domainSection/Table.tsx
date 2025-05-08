@@ -33,7 +33,7 @@ function Table({
         <div className="flex justify-center w-full my-20 overflow-x-auto ">
             {domainsListLoading ? (
                 <BiLoader className="text-6xl mt-24" />
-            ) : (
+            ) : domainsList.length > 0 ? (
                 <table className="w-full rounded-lg mx-12 relative">
                     <thead className="text-left ">
                         <tr>
@@ -117,6 +117,13 @@ function Table({
                         ))}
                     </tbody>
                 </table>
+            ) : (
+                <div className="flex flex-col items-center justify-center w-full mt-20 text-gray-500">
+                    <BiErrorCircle className="text-6xl mb-4 text-gray-400" />
+                    <h4 className="text-lg font-medium">
+                        There's no Domain to Show
+                    </h4>
+                </div>
             )}
         </div>
     );
