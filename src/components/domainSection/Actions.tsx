@@ -1,14 +1,14 @@
 import React from "react";
 import { BiPlus, BiSearch } from "react-icons/bi";
-import Drawer from "../modals/Drawer";
 import useGlobalStates from "@/store/globalStates";
 
 function Actions({
-    drawerType,
     setDrawerType,
     toggleDrawer,
-    isOpenDrawer,
-    setIsOpenDrawer,
+    search,
+    setSearch,
+    setSortOrder,
+    setFilterActivation,
 }: any) {
     const { setSingleGlobalDomainData } = useGlobalStates();
 
@@ -31,17 +31,38 @@ function Actions({
                     </button>
                 </div>
                 <div className="flex flex-col md:flex-row items-center gap-4 w-full md:max-w-2/3 justify-end ">
-                    <select className="h-12 outline-none border-1 border-gray-400 rounded-sm p-3 w-2/3 md:w-auto text-gray-500">
-                        <option value="ascending">Order by Ascending</option>
-                        <option value="descending">Order by Descending</option>
+                    <select
+                        onChange={(e) => setSortOrder(e.target.value)}
+                        className="h-12 outline-none border-1 border-gray-400 rounded-sm p-3  w-2/3 md:w-auto text-gray-500"
+                    >
+                        <option value="" disabled selected>
+                            Sort By
+                        </option>
+                        <option value="asc">Order by Ascending</option>
+                        <option value="desc">Order by Descending</option>
+                    </select>
+                    <select
+                        onChange={(e) => setFilterActivation(e.target.value)}
+                        className="h-12 outline-none border-1 border-gray-400 rounded-sm p-3 w-2/3 md:w-auto text-gray-500"
+                    >
+                        <option value="" disabled selected>
+                            Filters for Activation
+                        </option>
+                        <option value="all">All</option>
+                        <option value="true">Active</option>
+                        <option value="false">Disable</option>
                     </select>
                     <div className="relative w-2/3 md:w-auto">
                         <BiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2  " />
-                        <input
-                            className="h-12 outline-none border-1 border-gray-400 rounded-sm p-3 pl-10 w-full"
-                            type="search"
-                            placeholder="Search"
-                        />
+                        <form onSubmit={(e) => e.preventDefault()}>
+                            <input
+                                className="h-12 outline-none border-1 border-gray-400 rounded-sm p-3 pl-10 w-full"
+                                type="search"
+                                placeholder="Search"
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                            />
+                        </form>
                     </div>
                 </div>
             </div>

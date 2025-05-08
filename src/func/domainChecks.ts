@@ -1,13 +1,13 @@
-const checkActiveTitle = (isActive: boolean) => {
-    if (isActive) {
+const checkActiveTitle = (isActive: string) => {
+    if (isActive === "true") {
         return "Active";
     } else {
-        return "Not Active";
+        return "Disable";
     }
 };
 
-const checkActiveColor = (isActive: boolean) => {
-    if (isActive) {
+const checkActiveColor = (isActive: string) => {
+    if (isActive === "true") {
         return "text-green-500";
     } else {
         return "text-red-500";

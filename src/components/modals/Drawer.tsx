@@ -39,19 +39,9 @@ const Drawer = ({ type, isOpen, onClose }: any) => {
         }
     }, [type, singleGlobalDomainData, reset]);
 
-    const {
-        createDomain,
-        createDomainData,
-        createDomainError,
-        createDomainLoading,
-    } = useCreateDomain();
+    const { createDomain } = useCreateDomain();
 
-    const {
-        updateDomain,
-        updateDomainData,
-        updateDomainError,
-        updateDomainLoading,
-    } = useUpdateDomain();
+    const { updateDomain } = useUpdateDomain();
 
     const onSubmit = (data: any) => {
         if (type === "Add") {
@@ -162,7 +152,6 @@ const Drawer = ({ type, isOpen, onClose }: any) => {
                         </button>
                         <button
                             type="submit"
-                            disabled={createDomainLoading}
                             className="w-1/2 bg-blue-400 text-white p-2 rounded disabled:opacity-50"
                         >
                             {type}

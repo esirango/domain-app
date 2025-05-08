@@ -4,6 +4,7 @@ import { mutate } from "swr";
 
 const useCreateDomain = () => {
     const createDomain = async (postData: any) => {
+        console.log(postData);
         const response = await fetcher({
             url: `${API_URL}/domain`,
             body: {

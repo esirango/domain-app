@@ -28,6 +28,7 @@ function Table({
         setMenuPosition({ x: rect.right, y: rect.bottom });
         setDomainID(domainId);
     };
+
     return (
         <div className="flex justify-center w-full my-20 overflow-x-auto ">
             {domainsListLoading ? (
@@ -70,10 +71,10 @@ function Table({
                                 </TableCell>
                                 <TableCell
                                     className={checkActiveColor(
-                                        domain.isActive
+                                        String(domain.isActive)
                                     )}
                                 >
-                                    {checkActiveTitle(domain.isActive)}
+                                    {checkActiveTitle(String(domain.isActive))}
                                 </TableCell>
                                 <TableCell
                                     className={checkVerificationStatusColor(
