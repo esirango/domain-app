@@ -1,17 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BiX } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 import useCreateDomain from "@/hooks/useCreateDomain";
+import useUpdateDomain from "@/hooks/useUpdateDomain";
+import useGlobalStates from "@/store/globalStates";
 
 const urlRegex = /^https:\/\/(www\.)?[a-zA-Z0-9\-]+\.[a-zA-Z]{2,}(\S*)?$/;
 
 const Drawer = ({ type, isOpen, onClose }: any) => {
-    const {
-        createDomain,
-        createDomainData,
-        createDomainError,
-        createDomainLoading,
-    } = useCreateDomain();
+    const { singleGlobalDomainData } = useGlobalStates();
 
     const {
         register,
@@ -26,8 +23,46 @@ const Drawer = ({ type, isOpen, onClose }: any) => {
         },
     });
 
+    useEffect(() => {
+        if (type === "Add") {
+            reset({
+                domain: "",
+                status: "",
+                isActive: "",
+            });
+        } else if (type === "Edit" && singleGlobalDomainData) {
+            reset({
+                domain: singleGlobalDomainData.domain,
+                status: singleGlobalDomainData.status,
+                isActive: String(singleGlobalDomainData.isActive),
+            });
+        }
+    }, [type, singleGlobalDomainData, reset]);
+
+    const {
+        createDomain,
+        createDomainData,
+        createDomainError,
+        createDomainLoading,
+    } = useCreateDomain();
+
+    const {
+        updateDomain,
+        updateDomainData,
+        updateDomainError,
+        updateDomainLoading,
+    } = useUpdateDomain(
+        type === "Edit" && singleGlobalDomainData
+            ? singleGlobalDomainData.id
+            : "1"
+    );
+
     const onSubmit = (data: any) => {
-        createDomain(data);
+        if (type === "Add") {
+            createDomain(data);
+        } else if (type === "Edit") {
+            updateDomain(data);
+        }
         reset();
         onClose();
     };

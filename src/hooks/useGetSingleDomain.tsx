@@ -4,7 +4,7 @@ import useSWR from "swr";
 
 const useGetSingleDomain = (domainID: string) => {
     const { data, error, isLoading } = useSWR(
-        [`${API_URL}/domain/${domainID}`],
+        domainID ? [`${API_URL}/domain/${domainID}`] : null,
         ([url]) =>
             fetcher({
                 url: url,

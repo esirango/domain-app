@@ -1,6 +1,5 @@
-import { checkVerificationStatusTitle } from "@/func/domainChecks";
 import useGetSingleDomain from "@/hooks/useGetSingleDomain";
-import useUpdateDomain from "@/hooks/useUpdateDomain";
+import useGlobalStates from "@/store/globalStates";
 import { useEffect, useRef } from "react";
 
 const OptionsMenu = ({
@@ -10,16 +9,21 @@ const OptionsMenu = ({
     setDrawerType,
 }: {
     onClose: () => void;
-    domainID: string;
+    domainID: any;
     toggleDrawer: () => void;
     setDrawerType: any;
 }) => {
-    console.log(toggleDrawer);
-
+    const { singleGlobalDomainData, setSingleGlobalDomainData } =
+        useGlobalStates();
     const { singleDomainData } = useGetSingleDomain(domainID);
-    const { updateDomainData } = useUpdateDomain();
 
-    console.log(singleDomainData);
+    useEffect(() => {
+        if (singleDomainData) {
+            setSingleGlobalDomainData(singleDomainData);
+            console.log(singleDomainData);
+        }
+    }, [singleDomainData, singleGlobalDomainData]);
+
     const menuRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {

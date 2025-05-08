@@ -17,7 +17,7 @@ function Table({
     toggleDrawer,
     setDrawerType,
 }: any) {
-    const [openMenuId, setOpenMenuId] = useState<number | null>(null);
+    const [domainID, setDomainID] = useState<number | null>(null);
     const [menuPosition, setMenuPosition] = useState<{
         x: number;
         y: number;
@@ -26,7 +26,7 @@ function Table({
     const handleMenuClick = (event: React.MouseEvent, domainId: number) => {
         const rect = (event.target as HTMLElement).getBoundingClientRect();
         setMenuPosition({ x: rect.right, y: rect.bottom });
-        setOpenMenuId(domainId);
+        setDomainID(domainId);
     };
     return (
         <div className="flex justify-center w-full my-20 overflow-x-auto ">
@@ -93,7 +93,7 @@ function Table({
                                         <BsThreeDotsVertical />
                                     </button>
 
-                                    {openMenuId !== null && menuPosition && (
+                                    {domainID !== null && menuPosition && (
                                         <div
                                             className="fixed bg-white shadow-md border border-gray-200 rounded-lg z-[1000]"
                                             style={{
@@ -105,9 +105,9 @@ function Table({
                                                 setDrawerType={setDrawerType}
                                                 toggleDrawer={toggleDrawer}
                                                 onClose={() =>
-                                                    setOpenMenuId(null)
+                                                    setDomainID(null)
                                                 }
-                                                domainID={domain.id}
+                                                domainID={domainID}
                                             />
                                         </div>
                                     )}

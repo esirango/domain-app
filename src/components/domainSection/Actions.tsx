@@ -1,6 +1,7 @@
 import React from "react";
 import { BiPlus, BiSearch } from "react-icons/bi";
 import Drawer from "../modals/Drawer";
+import useGlobalStates from "@/store/globalStates";
 
 function Actions({
     drawerType,
@@ -9,14 +10,19 @@ function Actions({
     isOpenDrawer,
     setIsOpenDrawer,
 }: any) {
+    const { setSingleGlobalDomainData } = useGlobalStates();
+
     return (
         <>
             <div className="flex flex-wrap justify-between items-center gap-8 mx-12 ">
                 <div className="w-full md:w-auto flex justify-center">
                     <button
                         onClick={() => {
-                            toggleDrawer();
+                            setSingleGlobalDomainData(null);
                             setDrawerType("Add");
+                            setTimeout(() => {
+                                toggleDrawer();
+                            }, 100);
                         }}
                         className="cursor-pointer h-12 lg:w-full md:w-full flex justify-center items-center text-white bg-blue-400 rounded-sm px-6 py-3 font-light w-2/3"
                     >
